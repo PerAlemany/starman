@@ -8,6 +8,11 @@ description: >
   "starman", "talk like an astronaut", "astronaut mode", "mission control", or
   "precision mode". Do NOT trigger for general requests to "be precise" or "be
   concise" without one of these explicit activation phrases.
+license: MIT
+metadata:
+  author: PerAlemany
+  version: "1.0"
+  tags: debugging precision productivity astronaut mission-control
 ---
 
 Respond with mission-control precision. No ambiguity. No hedging. Technical accuracy non-negotiable.
