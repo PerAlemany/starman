@@ -1,0 +1,157 @@
+{
+  "skill_name": "starman",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "My /api/orders endpoint starts returning 500 errors after a few hours of uptime, but if I restart the service it works fine again. No recent deployments. I have no idea what's going on.",
+      "expected_output": "Structured response using STATUS/ANOMALY/ANALYZE/GO-NO-GO/PROCEDURE/VERIFY. Should identify intermittent pattern as likely memory leak or resource exhaustion, list candidates with UNKNOWN markers for missing data, form a HYPOTHESIS, and provide a measurable VERIFY step with a loop-back condition.",
+      "files": [],
+      "expectations": [
+        "Response uses STATUS/ANOMALY/ANALYZE structure with no hedging language",
+        "Identifies intermittent + restart-resolves pattern as resource exhaustion or memory leak",
+        "Includes at least one UNKNOWN marker for missing diagnostic data",
+        "Includes HYPOTHESIS label for the leading candidate",
+        "VERIFY step includes a measurable criterion (e.g., error rate, count, or time window)",
+        "VERIFY step includes a loop-back condition to ANALYZE on failure"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I'm building a notification system for 100k users. Should I use WebSockets or Server-Sent Events?",
+      "expected_output": "Structured decision using the framework. ANOMALY replaced by CONTEXT. Should surface UNKNOWN items, compare tradeoffs, form a HYPOTHESIS, issue a GO with explicit criteria, and define a VERIFY step.",
+      "files": [],
+      "expectations": [
+        "Uses CONTEXT instead of ANOMALY (no anomaly present, decision task)",
+        "ANALYZE includes tradeoffs for both options (not just a recommendation)",
+        "Issues a clear GO with the chosen option and explicit reasoning",
+        "Includes at least one UNKNOWN that could affect the decision",
+        "VERIFY step is measurable and tied to the chosen solution",
+        "No hedging language (no 'I think', 'maybe', 'could be', 'might')"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Why does this code cause an infinite loop?\n\nuseEffect(() => {\n  setUser(parseUser(data));\n}, [data, parseUser]);",
+      "expected_output": "Precise root cause analysis. Should identify that parseUser is a new function reference on each render, causing useEffect to re-run and setUser to trigger re-render. GO should pick the lowest-footprint fix. VERIFY should be measurable.",
+      "files": [],
+      "expectations": [
+        "Correctly identifies new function reference on each render as root cause",
+        "Does not speculate or add unnecessary caveats to the root cause",
+        "GO picks the lowest-footprint fix (useCallback or useMemo)",
+        "PROCEDURE step is specific and actionable (not vague)",
+        "VERIFY step is measurable (e.g., profiler shows zero re-renders on stable input)"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "/starman terse\n\nMy /api/orders endpoint starts returning 500 errors after a few hours of uptime, but if I restart the service it works fine again. No recent deployments. I have no idea what's going on.",
+      "expected_output": "Terse mode: same precision and completeness as nominal, but no section labels. Dense, compact output. Should still include candidates, UNKNOWN, HYPOTHESIS, GO decision, procedure steps, and VERIFY with loop-back — all without STATUS:/ANOMALY:/ANALYZE: labels.",
+      "files": [],
+      "expectations": [
+        "Output contains no section labels (no STATUS:, ANOMALY:, ANALYZE:, GO:, PROCEDURE:, VERIFY:)",
+        "Output contains the same analytical elements as a nominal response (root cause identification, at least one UNKNOWN marker, a GO or NO-GO decision, and a VERIFY criterion with loop-back) — but expressed without section labels and in compressed form",
+        "Still identifies intermittent + restart pattern as resource exhaustion",
+        "Still includes explicit UNKNOWN marker(s)",
+        "Still includes a GO decision and procedure steps",
+        "Still includes a VERIFY criterion with loop-back"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Should we deploy this hotfix to production right now? The fix is ready.",
+      "expected_output": "NO-GO response. Should identify blocking unknowns (staging validation, rollback plan, traffic window) and state explicit return criteria before re-evaluating. Must NOT issue a GO with caveats.",
+      "files": [],
+      "expectations": [
+        "Issues NO-GO (not GO with caveats)",
+        "Lists at least two specific blocking unknowns (e.g., staging validation, rollback plan, traffic window)",
+        "States explicit return criteria: what must be confirmed before re-evaluating",
+        "Does not issue a GO or partial GO",
+        "No hedging language"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "We're running a Go service on a single VM with 2GB RAM. It has 4 workers pulling jobs from a Redis queue. Each job loads a full CSV from S3 and processes it entirely in memory. We're getting OOM-killed every 6–8 hours. The CSV files have grown from ~5MB average to ~800MB average over the last month.",
+      "expected_output": "Protocol step 1: infer from context. Model should NOT ask about RAM, worker count, or file size — all are explicitly stated. STATUS should include 2GB RAM, 4 workers, ~800MB per file as confirmed facts. ANALYZE should derive that 4 × 800MB = 3.2GB > 2GB as the root cause, without marking these as UNKNOWNs.",
+      "files": [],
+      "expectations": [
+        "STATUS includes 2GB RAM as a confirmed fact (not UNKNOWN)",
+        "STATUS includes 4 workers as a confirmed fact (not UNKNOWN)",
+        "STATUS includes ~800MB CSV size as a confirmed fact (not UNKNOWN)",
+        "ANALYZE derives memory pressure from provided numbers (4 × 800MB > 2GB) — does not ask user for this info",
+        "Response does not ask for information already present in the message",
+        "GO or NO-GO issued based on available information",
+        "The multiplication 4 × 800MB is shown explicitly and the result correctly exceeds 2GB (e.g., 3,200MB or 3.2GB)"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "We're using Litestream v0.5 to replicate our SQLite database in production. Every few hours our API completely freezes for 2–3 seconds. Logs show 'TRUNCATE checkpoint triggered'. We haven't configured any checkpoint settings. What's the default threshold that triggers this and what's the impact on our app?",
+      "expected_output": "Protocol step 3: official sources. Model should look up Litestream v0.5 official docs via web fetch. Should state the specific default value (truncate-page-n: 121359 pages, ~500MB WAL) as a confirmed fact, not UNKNOWN. Should correctly identify that TRUNCATE checkpoint blocks both readers AND writers (unlike PASSIVE which is non-blocking). Should NOT surface this as UNKNOWN and ask the user.",
+      "files": [],
+      "expectations": [
+        "States a specific threshold value for the TRUNCATE checkpoint trigger (121359 pages or ~500MB) as confirmed fact",
+        "Correctly states that TRUNCATE checkpoint blocks both readers AND writers",
+        "Does NOT mark the default threshold value as UNKNOWN and ask the user to check the docs",
+        "Distinguishes TRUNCATE from PASSIVE checkpoint behavior",
+        "PROCEDURE includes actionable remediation (e.g., configure truncate-page-n or disable it)"
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "Our Express auth middleware is letting unauthenticated requests through intermittently. Here's the code:\n\nconst authMiddleware = async (req, res, next) => {\n  const token = req.headers['authorization']?.split(' ')[1];\n  if (!token || token === 'undefined') {\n    return res.status(401).json({ error: 'No token' });\n  }\n  try {\n    const user = await verifyToken(token);\n    req.user = user;\n    next();\n  } catch (err) {\n    if (err.name === 'TokenExpiredError') {\n      return res.status(401).json({ error: 'Token expired' });\n    }\n    next();\n  }\n};",
+      "expected_output": "Protocol step 4: codebase inspection. Model should identify the bug by reading the provided code. The root cause is next() in the catch block for non-TokenExpiredError errors (invalid signature, malformed token, etc.) — which passes the request through unauthenticated. Should NOT mark 'why requests pass through' as UNKNOWN. Should reference the specific line and provide a concrete fix.",
+      "files": [],
+      "expectations": [
+        "Identifies next() in the catch block (for non-TokenExpiredError errors) as the root cause",
+        "Does NOT mark 'why unauthenticated requests pass through' as UNKNOWN",
+        "References the specific code location (catch block, fallthrough next() call)",
+        "PROCEDURE includes a concrete fix (replace next() with return res.status(401))",
+        "VERIFY step explicitly tests a request with a malformed or invalid-signature token and confirms a 401 response — covering the exact failure path the bug exposes",
+        "Explains why the failure is intermittent: valid tokens succeed normally, while tokens failing for non-expiry reasons (malformed, wrong signature) trigger the catch-block fallthrough"
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "Our CI/CD pipeline is failing at the deploy step. It's been working fine for 6 months and broke this morning. No code changes were made. How do I debug this?",
+      "expected_output": "Protocol step 5: ask user (last resort). Blocking UNKNOWN is the exact error message — nothing in the prompt resolves it. Model should ask specifically for the error message or deploy logs, NOT give a generic troubleshooting checklist. The question should be minimal and targeted, not open-ended.",
+      "files": [],
+      "expectations": [
+        "Asks for the specific error message or deploy logs (not a vague 'describe the issue')",
+        "Does NOT provide a full generic troubleshooting checklist without first seeing the error",
+        "The question asked is specific and minimal (not open-ended)",
+        "Issues NO-GO or equivalent — blocking unknown prevents diagnosis",
+        "ANALYZE identifies candidates for sudden failure (expired credentials, provider outage, infra change) without picking one without evidence"
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "We're running a TypeScript service on Node 18. It handles Stripe webhooks. Started getting timeouts this week — but only for payment_intent.succeeded events, other event types work fine. Here's the handler:\n\napp.post('/webhook', express.raw({ type: 'application/json' }), async (req, res) => {\n  const sig = req.headers['stripe-signature'];\n  let event;\n  try {\n    event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);\n  } catch (err) {\n    return res.status(400).send(`Webhook Error: ${err.message}`);\n  }\n  await processEvent(event);\n  res.json({ received: true });\n});",
+      "expected_output": "Protocol chain: step 1 (infer) + step 4 (codebase) + step 5 (ask). Model should infer Stripe's 30s timeout requirement from context. Should identify await processEvent(event) before res.json as a structural issue. Should ask specifically about processEvent implementation for payment_intent.succeeded — NOT ask about things already known (Node 18, Stripe setup, handler structure).",
+      "files": [],
+      "expectations": [
+        "Infers Stripe's timeout requirement from context (does not ask 'what platform are you using?')",
+        "Identifies await processEvent(event) before res.json as the structural pattern causing timeouts",
+        "Does NOT mark Node version, Stripe setup, or handler structure as UNKNOWN (all provided)",
+        "Identifies the internals of processEvent for payment_intent.succeeded as the remaining unresolved unknown — whether via a targeted clarifying question or explicit debug steps scoped specifically to that function",
+        "PROCEDURE or return criteria references acknowledging response before heavy processing"
+      ]
+    },
+    {
+      "id": 11,
+      "prompt": "This is a multi-turn conversation. Respond to each user message in sequence, clearly labeling each response as Turn 1, Turn 2, and Turn 3.\n\nTurn 1 — User: \"starman mode. Our Kubernetes pods are restarting every 2–3 hours. No code changes in the last week. OOMKilled in the events log.\"\n\nTurn 2 — User: \"Quick question while we dig into this — what does OOMKilled mean exactly?\"\n\nTurn 3 — User: \"Got it. One more thing: the pods have a 512Mi memory limit set.\"",
+      "expected_output": "Multi-turn persistence test. Turn 1 should activate starman and apply the full STATUS/ANOMALY/ANALYZE framework to the OOMKilled diagnosis. Turn 2 should maintain starman mode — not exit to plain conversational prose just because the question is simple. Turn 3 should integrate the new fact (512Mi limit) into the ongoing analysis as a confirmed fact, without hedging or restarting from scratch.",
+      "files": [],
+      "expectations": [
+        "Turn 1 response uses the starman framework (STATUS/ANOMALY/ANALYZE structure with no hedging language)",
+        "Turn 2 response maintains starman mode — applies at minimum STATUS and ANALYZE sections (does not fall back to a custom 'DEFINITION —' format or plain conversational prose)",
+        "Turn 3 response incorporates 512Mi memory limit as a confirmed fact and updates the analysis accordingly",
+        "No turn uses hedging qualifiers as standalone uncertainty markers (no 'I think', 'maybe', 'could be', 'might', 'likely', 'may be', 'probably', 'perhaps' outside of a HYPOTHESIS: or UNKNOWN: label) across all three turns",
+        "Starman mode is never re-activated by the user yet persists across all three turns without degrading",
+        "All three turns format starman sections as fenced code blocks (``` ... ```) — not as bold markdown headers (**STATUS:**) or plain prose",
+        "Turn 3 response issues an explicit GO or NO-GO verdict (not just analysis, recommendations, or 'next steps' framing)",
+        "Turn 3 PROCEDURE (or equivalent action steps) branches by scenario — provides distinct remediation paths for at least two root-cause hypotheses (e.g., memory leak vs. undersized limit), not a single flat diagnostic list"
+      ]
+    }
+  ]
+}

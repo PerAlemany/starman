@@ -1,0 +1,94 @@
+[
+  {
+    "query": "starman mode. production db is throwing FK violations every 30 minutes on the orders table. no recent migrations. last deploy was 3 weeks ago.",
+    "should_trigger": true
+  },
+  {
+    "query": "mission control protocol — deciding between kafka and rabbitmq for our payment processing pipeline. 10k msgs/sec, exactly-once guarantees required, team knows neither tool",
+    "should_trigger": true
+  },
+  {
+    "query": "talk like an astronaut. my react app re-renders 200 times on a single button click and i cant figure out why. profiler shows ComponentA at the top every time",
+    "should_trigger": true
+  },
+  {
+    "query": "be precise, no fluff. go service has been leaking goroutines in prod for 2 days. narrowed it to the grpc server handler but can't find the exact leak site",
+    "should_trigger": true
+  },
+  {
+    "query": "starman. split our monolith into microservices? 800k LOC, 40 engineers, 3-second p99 on all endpoints, been told we need to scale for next quarter",
+    "should_trigger": true
+  },
+  {
+    "query": "precision mode. kubernetes cluster oomkilled 3 pods in the last hour. 2Gi memory limit. no code changes in the past 10 days. need to understand what's happening before i wake up my team",
+    "should_trigger": true
+  },
+  {
+    "query": "mission control thinking please — race condition in our postgres upsert, happens about 1% of requests under peak load. on-call engineer has been paged 3 nights in a row",
+    "should_trigger": true
+  },
+  {
+    "query": "talk like mission control — we need to roll back a hotfix to prod right now. it's a db migration that added 3 nullable columns. 500 active users online. what are the risks and steps?",
+    "should_trigger": true
+  },
+  {
+    "query": "i want structured analysis like an astronaut would give. evaluating whether to migrate our auth system from server sessions to JWTs. 50k dau, mobile clients involved",
+    "should_trigger": true
+  },
+  {
+    "query": "astronaut mode on. cloudwatch costs tripled this month from $800 to $2400 and i need to find the spike before my monday meeting with the CFO",
+    "should_trigger": true
+  },
+  {
+    "query": "quick question — what's the difference between kafka and rabbitmq? just give me the highlights so i can explain it to my team tomorrow in our standup",
+    "should_trigger": false
+  },
+  {
+    "query": "we need to choose between postgres and mysql for our new side project. small team of 2, standard crud, nothing special. what do you think?",
+    "should_trigger": false
+  },
+  {
+    "query": "can you be precise? i need you to write me a concise bio in 3 sentences. i'm a backend engineer at a fintech startup in berlin",
+    "should_trigger": false
+  },
+  {
+    "query": "please be precise and don't pad the answer — what does the --no-cache flag do in docker build and when should i use it?",
+    "should_trigger": false
+  },
+  {
+    "query": "our app crashed in prod this morning but we already fixed and deployed. can you look at this incident report i wrote and tell me if i missed anything obvious?",
+    "should_trigger": false
+  },
+  {
+    "query": "there's a memory leak somewhere in my node app. can you look at this heap dump output and tell me what objects i should be looking at?",
+    "should_trigger": false
+  },
+  {
+    "query": "how do astronauts deal with sleep deprivation on long space missions? i've been reading about circadian rhythms and it's making me think about my sleep schedule during crunch time",
+    "should_trigger": false
+  },
+  {
+    "query": "i want to add soft deletes to our postgres schema. is there a standard approach or should i just use a deleted_at timestamp column?",
+    "should_trigger": false
+  },
+  {
+    "query": "can you help me outline the tradeoffs between graphql and rest for our new api? my boss asked me to write a decision doc and i need a solid structure",
+    "should_trigger": false
+  },
+  {
+    "query": "explain kubernetes networking to me — specifically why pods on different nodes can talk to each other. i'm trying to understand a connectivity issue i'm seeing in my cluster",
+    "should_trigger": false
+  },
+  {
+    "query": "my postgres query is taking 30s on a table with 2M rows. here's the EXPLAIN ANALYZE output, can you tell me what's wrong?",
+    "should_trigger": false
+  },
+  {
+    "query": "be precise — what's the difference between a goroutine and a thread in go?",
+    "should_trigger": false
+  },
+  {
+    "query": "precision mode — our redis cluster started dropping writes every ~40 minutes. no config changes. 3 replicas, AOF enabled",
+    "should_trigger": true
+  }
+]
