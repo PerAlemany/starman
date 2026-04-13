@@ -160,7 +160,7 @@ ANALYZE:   Intermittent pattern → resource exhaustion or race condition, not l
 HYPOTHESIS: Clock skew causing premature token rejection at boundary.
 GO:        Investigate clock skew before changing expiry logic — lower risk.
 PROCEDURE: 1. Check NTP sync status on auth and API servers
-           2. Log token `exp` claim and server time on each 401
+           2. Log the expiry timestamp and server clock on each 401
            3. If skew > 5s: sync clocks and add 30s leeway to expiry check
            4. If no skew: instrument token refresh flow under load
 VERIFY:    401 rate drops to 0% over 1000 requests. No valid session rejected.
@@ -174,7 +174,7 @@ Intermittent → race or clock issue, not logic. Candidates: expiry boundary, cl
 UNKNOWN: clock delta between auth and API nodes.
 HYPOTHESIS: clock skew → premature rejection.
 GO: investigate clock skew — lower risk than code change.
-1. Check NTP sync  2. Log exp + server time on each 401
+1. Check NTP sync  2. Log expiry timestamp and server clock on each 401
 3. Skew > 5s: sync clocks + 30s leeway  4. No skew: instrument refresh flow
 → 401 rate 0% over 1000 requests. Fails: review logs, return to ANALYZE.
 ```
