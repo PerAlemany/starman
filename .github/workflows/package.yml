@@ -1,0 +1,49 @@
+name: Package skill
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - SKILL.md
+      - README.md
+      - CONTRIBUTING.md
+      - references/**
+      - scripts/**
+      - assets/**
+
+concurrency:
+  group: package-skill
+  cancel-in-progress: false
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Pull latest before making changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
+
+      - name: Build starman.skill
+        run: |
+          cd ..
+          zip -r starman/starman.skill starman/ \
+            --exclude "starman/.git/*" \
+            --exclude "starman/.github/*" \
+            --exclude "starman/evals/*" \
+            --exclude "starman/starman.skill" \
+            --exclude "starman/.DS_Store"
+
+      - name: Commit and push if changed
+        run: |
+          git add starman.skill
+          git diff --staged --quiet && exit 0
+          git commit -m "chore: rebuild starman.skill [skip ci]"
+          git push
