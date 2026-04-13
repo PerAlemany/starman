@@ -4,7 +4,7 @@
 
 A skill for [Claude Code](https://claude.ai/code) / [OpenCode](https://opencode.ai) that activates mission-control precision mode. No hedging. No speculation. Just confirmed facts, explicit unknowns, and structured reasoning — the way you'd want your systems diagnosed at 2am.
 
-## 📦 Installation
+## Installation
 
 ```bash
 npx skills add https://github.com/PerAlemany/starman --skill starman
