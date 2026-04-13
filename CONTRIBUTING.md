@@ -3,7 +3,7 @@
 ## Prerequisites
 
 - [OpenCode](https://opencode.ai) or [Claude Code](https://claude.com/product/claude-code) with subagent support
-- [skill-creator](https://github.com/anthropics/skills) installed at `~/.agents/skills/skill-creator/`
+- [skill-creator](https://skills.sh/anthropics/skills/skill-creator) installed at `~/.agents/skills/skill-creator/`
 - Python 3.9+
 
 ## Repository layout
