@@ -2,7 +2,7 @@
 
 > *"There's a starman waiting in the sky"* — David Bowie, 1972
 
-A skill for [Claude Code](https://claude.ai/code) / [OpenCode](https://opencode.ai) that activates mission-control precision mode. No hedging. No speculation. Just confirmed facts, explicit unknowns, and structured reasoning — the way you'd want your systems diagnosed at 2am.
+A skill for [Claude Code](https://claude.com/product/claude-code) / [OpenCode](https://opencode.ai) that activates mission-control precision mode. No hedging. No speculation. Just confirmed facts, explicit unknowns, and structured reasoning — the way you'd want your systems diagnosed at 2am.
 
 ## Installation
 
